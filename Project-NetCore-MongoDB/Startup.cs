@@ -7,15 +7,25 @@ using Microsoft.IdentityModel.Tokens;
 using Project_NetCore_MongoDB.Repository.Interface;
 using Project_NetCore_MongoDB.Services.Interface;
 using Project_NetCore_MongoDB.Common;
-//using Project_NetCore_MongoDB.Middleware; 
+using Project_NetCore_MongoDB.Configuration;
+using Abp.Dependency;
+using Newtonsoft.Json.Serialization;
+using Project_NetCore_MongoDB.Middleware;
 
 namespace Project_NetCore_MongoDB
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private const string _defaultCorsPolicyName = "localhost";
+
+        // public Startup(IConfiguration configuration)
+        // {
+        //Configuration = configuration;
+        // }
+
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            Configuration = env.GetAppConfiguration();
         }
 
         public IConfiguration Configuration { get; }
@@ -25,16 +35,39 @@ namespace Project_NetCore_MongoDB
         {
 
             // Default Policy
-            services.AddCors(options =>
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(
+            //        builder =>
+            //        {
+            //            builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+            //                                .AllowAnyHeader()
+            //                                .AllowAnyMethod();
+            //        });
+            //});
+
+            if (Configuration.GetSection("App") != null && Configuration.GetSection("App").GetSection("CorsOrigins") != null)
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                    });
-            });
+                // Configure CORS for angular2 UI
+                services.AddCors(
+                    options => options.AddPolicy(
+                        _defaultCorsPolicyName,
+                        builder => builder
+                            .WithOrigins(
+                                // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
+                                Configuration
+                                    .GetSection("App")
+                                    .GetSection("CorsOrigins")
+                                    .GetChildren()
+                                    .Select(s => s.Value)
+                                    .ToArray()
+                            )
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials()
+                    )
+                );
+            }
 
             services.AddSwaggerGen(swagger =>
             {
@@ -60,7 +93,7 @@ namespace Project_NetCore_MongoDB
                                     Id = "Bearer"
                                 }
                             },
-                            new string[] {}
+                             new List<string>()
                     }
                 });
             });
@@ -103,8 +136,8 @@ namespace Project_NetCore_MongoDB
             //services.AddTransient<ICategoriesService, CategoriesService>();
             //services.AddTransient<ICategoriesRepository, CategoriesRepository>();
 
-            //services.AddTransient<IUsersService, UsersService>();
-            //services.AddTransient<IUsersRepository, UsersRepository>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IUsersRepository, UsersRepository>();
 
             //services.AddTransient<IRolesService, RolesService>();
             //services.AddTransient<IRolesRepository, RolesRepository>();
@@ -164,13 +197,15 @@ namespace Project_NetCore_MongoDB
 
             app.UseAuthorization();
 
-            app.UseCors(builder =>
-            {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            });
+            app.UseCors(_defaultCorsPolicyName); // Enable CORS!
+
+            //app.UseCors(builder =>
+            //{
+            //    builder
+            //    .AllowAnyOrigin()
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader();
+            //});
 
             app.UseSwagger();
 
@@ -186,7 +221,7 @@ namespace Project_NetCore_MongoDB
                 endpoints.MapControllers();
             });
 
-            
+
             // app.UseMvc();
         }
     }
