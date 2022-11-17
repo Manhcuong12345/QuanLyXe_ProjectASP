@@ -26,7 +26,7 @@ namespace Project_NetCore_MongoDB.Controllers
         }
         // GET: api/<ArticlesController>
         //[Authorize(Policy = "UserPolicy")]
-        [Authorize]
+        
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
