@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SEUhdzbx7ExrCqQXaKbWWdWyjY3FL3gvtz4Mnb5ozHmS5kgMcHotkWOFfl5GJmLxt2UnPXNov0NFzzeyisoh0A==",
+  "dgSpecHash": "CA5LfPrLwywDN6W+lzha7IFY+UN3MkpbFdh0SgDzM/nC3+5kL2Y40C6ZYY5zHwQtgLsFV6pwfwhNSJaMmn3QAA==",
   "success": true,
-  "projectFilePath": "D:\\ASP.NET\\apiqlxe\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\Desktop\\QuanLyXe\\QuanLyXe_ProjectASP\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\abp\\7.4.0\\abp.7.4.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
