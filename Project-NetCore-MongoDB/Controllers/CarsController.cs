@@ -32,12 +32,14 @@ namespace Project_NetCore_MongoDB.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var userIdToken = HttpContext.User.Claims.First(i => i.Type == "jti").Value;
+            var userIdToken = User.Claims.First(x => x.Type == "iss").Value;
             if (userIdToken == null)
              {
                 return BadRequest(new {message = "Not authorized to create this articles"});
              }
-                return Ok(await _carsService.GetAllAsync());
+            var data = await _carsService.GetAllAsync();
+            
+            return Ok(data);
         }
 
         [Authorize]
