@@ -28,18 +28,16 @@ namespace Project_NetCore_MongoDB.Controllers
         // GET: api/<ArticlesController>
         //[Authorize(Policy = "UserPolicy")]
 
-      
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var userIdToken = User.Claims.First(x => x.Type == "iss").Value;
+            var userIdToken = HttpContext.User.Claims.First(i => i.Type == "jti").Value;
             if (userIdToken == null)
              {
                 return BadRequest(new {message = "Not authorized to create this articles"});
              }
-            var data = await _carsService.GetAllAsync();
-            
-            return Ok(data);
+                return Ok(await _carsService.GetAllAsync());
         }
 
         [Authorize]

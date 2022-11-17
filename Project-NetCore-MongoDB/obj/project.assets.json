@@ -9225,11 +9225,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\Desktop\\QuanLyXe\\QuanLyXe_ProjectASP\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
+      "projectUniqueName": "D:\\ASP.NET\\apiqlxe\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
       "projectName": "Project-NetCore-MongoDB",
-      "projectPath": "C:\\Users\\ACER\\Desktop\\QuanLyXe\\QuanLyXe_ProjectASP\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
+      "projectPath": "D:\\ASP.NET\\apiqlxe\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\Desktop\\QuanLyXe\\QuanLyXe_ProjectASP\\Project-NetCore-MongoDB\\obj\\",
+      "outputPath": "D:\\ASP.NET\\apiqlxe\\Project-NetCore-MongoDB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
