@@ -4,11 +4,11 @@ namespace Project_NetCore_MongoDB.Dto
 {
     public class AuthsDto
     {
-        
-        [BsonElement("email")]
-        public string? Email { get; set; }
 
-        [BsonElement("password")]
+        [BsonElement("UserName")]
+        public string? UserName { get; set; }
+
+        [BsonElement("Password")]
         public string? Password { get; set; }
     }
 }

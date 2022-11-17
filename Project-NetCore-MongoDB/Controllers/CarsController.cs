@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Project_NetCore_MongoDB.Dto;
 using Project_NetCore_MongoDB.Services.Interface;
 using Project_NetCore_MongoDB.Services;
+//using Project_NetCore_MongoDB.Middleware;
+using Project_NetCore_MongoDB.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,14 +24,23 @@ namespace Project_NetCore_MongoDB.Controllers
             _carsService = carsService;
             _mapper = mapper;
         }
+        //tenantId
         // GET: api/<ArticlesController>
         //[Authorize(Policy = "UserPolicy")]
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            var userIdToken = HttpContext.User.Claims.First(i => i.Type == "jti").Value;
+            if (userIdToken == null)
+            {
+                return BadRequest(new { message = "Not authorized to create this articles" });
+            }
             return Ok(await _carsService.GetAllAsync());
         }
 
+        [Authorize]
         [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -43,57 +54,50 @@ namespace Project_NetCore_MongoDB.Controllers
             return Ok(cars);
         }
 
-       // [Authorize(Policy = "UserPolicy")]
+        // [Authorize(Policy = "UserPolicy")]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CarsDto cars)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest($"Name is required");
+                return BadRequest();
+            }
+
+            var existData = await _carsService.GetExistData(cars.License_Plates);
+            if (existData != null)
+            {
+                return BadRequest($"License_Plates is Exist");
             }
 
             var carsData = await _carsService.CreateAsync(cars);
+
+
             return CreatedAtAction(nameof(Get), new { id = carsData.Id }, carsData);
 
-           
-
-
-            //lay _id tu token khi user do dang nhap
-            //var userId = HttpContext.User.Claims.First(i => i.Type == "id").Value;
-
-            //check kiem tra _id cua user va authorId khi nhap gia tri tao, neu khong khop tra ve loi
-            // if (userId == null)
-            // {
-            //    return BadRequest(new { message = "Not authorized to create this articles" });
-            // }
-
-            // articles.AuthorId = userId;
-            //var carsData = await _carsService.CreateAsync(cars);
-
-            //return CreatedAtAction(nameof(Get), new { id = carsData.Id }, carsData);
         }
 
+        [Authorize]
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, CarsDto cars)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var data = await _carsService.GetByIdAsync(id);
             if (data == null)
             {
                 return NotFound($"Cars is not found!");
             }
 
-            //var userIdToken = HttpContext.User.Claims.First(i => i.Type == "id").Value;
-            //check Id author in artiles vs id token login user. If worng then error. True continue
-            //if (userIdToken != data.AuthorId)
-            //{
-                //return BadRequest(new { message = "Not authorized to update this articles" });
-           // }
-
             await _carsService.UpdateAsync(id, cars);
 
             return CreatedAtAction(nameof(Get), new { id = cars.Id }, cars);
         }
 
+        [Authorize]
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project_NetCore_MongoDB.Dto;
 using Project_NetCore_MongoDB.Models;
@@ -25,12 +26,14 @@ namespace Project_NetCore_MongoDB.Controllers
         }
         // GET: api/<ArticlesController>
         //[Authorize(Policy = "UserPolicy")]
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _driversService.GetAllAsync());
         }
 
+        [Authorize]
         [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -47,6 +50,7 @@ namespace Project_NetCore_MongoDB.Controllers
         }
 
         // [Authorize(Policy = "UserPolicy")]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(DriversDto drivers)
         {
@@ -70,6 +74,7 @@ namespace Project_NetCore_MongoDB.Controllers
             return CreatedAtAction(nameof(Get), new { id = driversData.Id }, driversData);
         }
 
+        [Authorize]
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, DriversDto drivers)
         {
@@ -91,6 +96,7 @@ namespace Project_NetCore_MongoDB.Controllers
             return CreatedAtAction(nameof(Get), new { id = drivers.Id }, drivers);
         }
 
+        [Authorize]
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {

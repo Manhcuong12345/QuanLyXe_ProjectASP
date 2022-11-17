@@ -10,7 +10,7 @@ using MongoDB.Bson;
 using DnsClient;
 
 namespace Project_NetCore_MongoDB.Repository
-{ 
+{
     public class UsersRepository : IUsersRepository
     {
         private readonly IMongoCollection<Users> _collection;
@@ -20,7 +20,7 @@ namespace Project_NetCore_MongoDB.Repository
             _settings = settings.Value;
             var client = new MongoClient(_settings.ConnectionString);
             var database = client.GetDatabase(_settings.DatabaseName);
-            _collection = database.GetCollection<Users>("user");
+            _collection = database.GetCollection<Users>("AbpUsers");
         }
 
         public async Task<Users> CreateAsync(Users user)
@@ -57,7 +57,7 @@ namespace Project_NetCore_MongoDB.Repository
         }
 
         //public Task<Users> LoginUser(string email,string password)
-        public Task<Users> LoginUser(string email)
+        public Task<Users> LoginUser(string UserName)
         {
             //string result = "";
             // var filter = Builders<Users>.Filter.Eq("name", name);
@@ -73,7 +73,7 @@ namespace Project_NetCore_MongoDB.Repository
             // return _collection.Find(result).FirstOrDefaultAsync();
             // }
 
-            return _collection.Find(x => x.Email == email).FirstOrDefaultAsync();
+            return _collection.Find(x => x.UserName == UserName).FirstOrDefaultAsync();
 
             //return _collection.Find(filter).FirstOrDefaultAsync();
             // var data = _collection.Find(x => x.Email == user.Email);
@@ -86,7 +86,7 @@ namespace Project_NetCore_MongoDB.Repository
 
         public Task DeleteAsync(string id)
         {
-            return  _collection.DeleteOneAsync(c => c.Id == id);
+            return _collection.DeleteOneAsync(c => c.Id == id);
         }
     }
-    }
+}

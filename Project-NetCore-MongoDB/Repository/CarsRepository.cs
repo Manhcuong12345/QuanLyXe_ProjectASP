@@ -27,6 +27,11 @@ namespace Project_NetCore_MongoDB.Repository
             return _collection.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
 
+        public Task<Cars> GetExistData(string license_plates)
+        {
+            return _collection.Find(c => c.License_Plates == license_plates).FirstOrDefaultAsync();
+        }
+
         public async Task<Cars> CreateAsync(Cars cars)
         {
             await _collection.InsertOneAsync(cars).ConfigureAwait(false);

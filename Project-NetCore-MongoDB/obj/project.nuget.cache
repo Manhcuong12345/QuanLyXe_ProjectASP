@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YhsPvVwemp4nj501/h+ruldeFuIJhpdOnqV5TS2tGGKi9nVzI0iiauBokxLTD+E4aSjSHByLTqJj6rku7waDvw==",
+  "dgSpecHash": "8afp9Jp4FPTg+Tmw5796rGF0y+6mgQi5cWTnD6vy8lVIAfmVcRMjtymXNOwohx/KXMPpZxFVi7slf+VGXT2h1A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ACER\\Desktop\\Project-CarsData\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\Desktop\\QuanLyXe\\QuanLyXe_ProjectASP\\Project-NetCore-MongoDB\\Project-NetCore-MongoDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

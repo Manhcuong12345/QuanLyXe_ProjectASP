@@ -7,7 +7,7 @@ namespace Project_NetCore_MongoDB.Repository.Interface
     {
         Task<List<Users>> GetAllAsync();
 
-        Task<Users> LoginUser(string email);
+        Task<Users> LoginUser(string UserName);
 
         Task<Users> CreateAsync(Users user);
 

@@ -10,5 +10,6 @@ namespace Project_NetCore_MongoDB.Services.Interface
         Task<Cars> CreateAsync(CarsDto cars);
         Task UpdateAsync(string id, CarsDto cars);
         Task DeleteAsync(string id);
+        Task<Cars> GetExistData(string license_plates);
     }
 }

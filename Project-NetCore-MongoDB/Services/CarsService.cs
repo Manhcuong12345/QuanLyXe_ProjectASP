@@ -27,6 +27,11 @@ namespace Project_NetCore_MongoDB.Services
             return _carsRepository.GetByIdAsync(id);
         }
 
+        public Task<Cars> GetExistData(string license_plates)
+        {
+            return _carsRepository.GetExistData(license_plates);
+        }
+
         public Task<Cars> CreateAsync(CarsDto cars)
         {
             var dataMapper = _mapper.Map<Cars>(cars);
@@ -45,6 +50,6 @@ namespace Project_NetCore_MongoDB.Services
             return _carsRepository.DeleteAsync(id);
         }
 
-       
+
     }
 }
