@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project_NetCore_MongoDB.Dto
 {
@@ -10,9 +11,11 @@ namespace Project_NetCore_MongoDB.Dto
         public string? Id { get; set; }
 
         [BsonElement("name")]
+        [Required]
         public string? Name { get; set; }
 
         [BsonElement("type_car")]
+        [Required]
         public string? Type_Car { get; set; }
 
         [BsonElement("consumption")]

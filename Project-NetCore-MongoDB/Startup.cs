@@ -10,8 +10,7 @@ using Project_NetCore_MongoDB.Common;
 using Project_NetCore_MongoDB.Configuration;
 using Abp.Dependency;
 using Newtonsoft.Json.Serialization;
-//using Project_NetCore_MongoDB.Middleware;
-using Project_NetCore_MongoDB.Configuration;
+using Project_NetCore_MongoDB.Middleware; 
 
 namespace Project_NetCore_MongoDB
 {
@@ -19,10 +18,10 @@ namespace Project_NetCore_MongoDB
     {
         private const string _defaultCorsPolicyName = "localhost";
 
-        // public Startup(IConfiguration configuration)
-        // {
-        //Configuration = configuration;
-        // }
+       // public Startup(IConfiguration configuration)
+       // {
+            //Configuration = configuration;
+       // }
 
         public Startup(IWebHostEnvironment env)
         {
@@ -222,7 +221,7 @@ namespace Project_NetCore_MongoDB
                 endpoints.MapControllers();
             });
 
-
+            
             // app.UseMvc();
         }
     }

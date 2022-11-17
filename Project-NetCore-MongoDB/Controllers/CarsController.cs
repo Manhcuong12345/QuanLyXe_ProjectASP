@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project_NetCore_MongoDB.Dto;
 using Project_NetCore_MongoDB.Services.Interface;
 using Project_NetCore_MongoDB.Services;
-//using Project_NetCore_MongoDB.Middleware;
+using Project_NetCore_MongoDB.Middleware;
 using Project_NetCore_MongoDB.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -34,10 +34,10 @@ namespace Project_NetCore_MongoDB.Controllers
         {
             var userIdToken = HttpContext.User.Claims.First(i => i.Type == "jti").Value;
             if (userIdToken == null)
-            {
-                return BadRequest(new { message = "Not authorized to create this articles" });
-            }
-            return Ok(await _carsService.GetAllAsync());
+             {
+                return BadRequest(new {message = "Not authorized to create this articles"});
+             }
+                return Ok(await _carsService.GetAllAsync());
         }
 
         [Authorize]
@@ -71,8 +71,8 @@ namespace Project_NetCore_MongoDB.Controllers
             }
 
             var carsData = await _carsService.CreateAsync(cars);
-
-
+           
+            
             return CreatedAtAction(nameof(Get), new { id = carsData.Id }, carsData);
 
         }

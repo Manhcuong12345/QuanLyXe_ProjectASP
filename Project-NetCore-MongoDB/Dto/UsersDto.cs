@@ -11,13 +11,13 @@ namespace Project_NetCore_MongoDB.Dto
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
-        [BsonElement("name")]
-        public string? Name { get; set; }
+        [BsonElement("UserName")]
+        public string? UserName { get; set; }
 
-        [BsonElement("email")]
+        [BsonElement("EmailAddress")]
         public string? Email { get; set; }
 
-        [BsonElement("password")]
+        [BsonElement("Password")]
         public string? Password { get; set; }
 
         [BsonElement("address")]

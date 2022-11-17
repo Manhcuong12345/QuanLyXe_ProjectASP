@@ -4,7 +4,7 @@ namespace Project_NetCore_MongoDB.Dto
 {
     public class AuthsDto
     {
-
+        
         [BsonElement("UserName")]
         public string? UserName { get; set; }
 

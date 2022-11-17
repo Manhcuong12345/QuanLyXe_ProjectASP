@@ -40,8 +40,8 @@ namespace Project_NetCore_MongoDB.Models
 
         public enum Role
         {
-            User,
-            Admin
+           User,
+           Admin
         }
 
         //public enum Gender

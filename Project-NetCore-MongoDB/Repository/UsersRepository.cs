@@ -10,7 +10,7 @@ using MongoDB.Bson;
 using DnsClient;
 
 namespace Project_NetCore_MongoDB.Repository
-{
+{ 
     public class UsersRepository : IUsersRepository
     {
         private readonly IMongoCollection<Users> _collection;
@@ -86,7 +86,7 @@ namespace Project_NetCore_MongoDB.Repository
 
         public Task DeleteAsync(string id)
         {
-            return _collection.DeleteOneAsync(c => c.Id == id);
+            return  _collection.DeleteOneAsync(c => c.Id == id);
         }
     }
-}
+    }
